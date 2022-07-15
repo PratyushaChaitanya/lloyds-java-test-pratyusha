@@ -207,4 +207,12 @@ class BoardMeetingScheduleApplicationTests {
         assertEquals(expectedOutput,actualoutput);
 
     }
+
+    @Test
+    public void emptyInputDataShouldEndWithInvalidInputError() {
+        meetingRequest = "";
+        when(boardMeetingScheduleController.getMeetingsScheduled(meetingRequest)).thenCallRealMethod();
+        ResponseEntity<String> actualOutput = boardMeetingScheduleController.getMeetingsScheduled(meetingRequest);
+        assertEquals(ResponseEntity.badRequest().body("Invalid Input"), actualOutput);
+    }
 }
